@@ -24,12 +24,13 @@ public class DatabaseUtil {
         return db;
     }
     public static void closeConnection(){
-        try{
-            con.close();
-            System.out.println("Connection closed");
-        }
-        catch(SQLException e){
-            e.printStackTrace();
+        if(con!=null) {
+            try {
+                con.close();
+                System.out.println("Connection closed");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
     public static void getAccount(){
@@ -110,7 +111,7 @@ public class DatabaseUtil {
             st.close();
         }
         catch(SQLException e){
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 }

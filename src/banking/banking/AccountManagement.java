@@ -7,12 +7,18 @@ import java.util.Scanner;
 
 public class AccountManagement {
     public static Scanner scan= BankingDriver.scan;
-    public static DatabaseUtil db= DatabaseUtil.getObject();
+    public DatabaseUtil db= DatabaseUtil.getObject();
     public void create(){
         while (true){
             System.out.print("1. Existing customer\n2. New customer\n3. Exit\nEnter the option: ");
-            int option= scan.nextInt();
-            scan.nextLine();
+            int option=0;
+            if(scan.hasNextInt()){
+                option=scan.nextInt();
+                scan.nextLine();
+            }
+            else {
+                scan.next();
+            }
             if (option==1) existingCustomer();
             else if (option==2) newCustomer();
             else if (option==3) break;
@@ -64,10 +70,12 @@ public class AccountManagement {
         int cid=scan.nextInt();
         DatabaseUtil.getCustomer();
         DatabaseUtil.getAccount();
-        System.out.print(Customers.customerdetails.get(cid)+"\n");
-        HashMap <Integer, Accounts> accountmap=Accounts.accountdetails.get(cid);
-        for(Accounts detail:accountmap.values()){
-            System.out.print(detail);
+        if(Customers.customerdetails.containsKey(cid)) {
+            System.out.print(Customers.customerdetails.get(cid) + "\n");
+            HashMap<Integer, Accounts> accountmap = Accounts.accountdetails.get(cid);
+            for (Accounts detail : accountmap.values()) {
+                System.out.print(detail);
+            }
         }
     }
     void getAccountData(){
@@ -75,10 +83,12 @@ public class AccountManagement {
         int cid=scan.nextInt();
         DatabaseUtil.getCustomer();
         DatabaseUtil.getAccount();
-        System.out.print(Customers.customerdetails.get(cid)+"\n");
-        HashMap <Integer, Accounts> accountmap=Accounts.accountdetails.get(cid);
-        for(Accounts detail:accountmap.values()){
-            System.out.print(detail);
+        if(Customers.customerdetails.containsKey(cid)) {
+            System.out.print(Customers.customerdetails.get(cid) + "\n");
+            HashMap<Integer, Accounts> accountmap = Accounts.accountdetails.get(cid);
+            for (Accounts detail : accountmap.values()) {
+                System.out.print(detail);
+            }
         }
     }
 }
