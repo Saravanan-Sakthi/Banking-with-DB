@@ -3,40 +3,40 @@ package banking.details;
 import java.util.HashMap;
 
 public class Customers {
-    public static HashMap<Integer,Customers> customerdetails= new HashMap<>();
+    public static HashMap<Integer,Customers> customerDetails = new HashMap<>();
     private int cid;
     private String name;
     private String email;
     private long mobile;
     private String city;
-    public void setcid(int cid){
+    public void setCid(int cid){
         this.cid=cid;
     }
-    public void setname(String name){
+    public void setName(String name){
         this.name=name;
     }
-    public void setemail(String email){
+    public void setEmail(String email){
         this.email=email;
     }
-    public void setmobile(long mobile){
+    public void setMobile(long mobile){
         this.mobile=mobile;
     }
-    public void setcity(String city){
+    public void setCity(String city){
         this.city=city;
     }
-    public int getcid(){
+    public int getCid(){
         return this.cid;
     }
-    public String getname(){
+    public String getName(){
         return this.name;
     }
-    public String getemail(){
+    public String getEmail(){
         return this.email;
     }
-    public long getmobile(){
+    public long getMobile(){
         return this.mobile;
     }
-    public String getcity(){
+    public String getCity(){
         return this.city;
     }
     @Override

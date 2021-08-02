@@ -6,28 +6,28 @@ public class Accounts {
     public static HashMap<Integer, HashMap> accountdetails= new HashMap<>();
     private int acc;
     private int cid;
-    private int accountbalance;
+    private int accountBalance;
     private String branch;
-    public void setacc(int acc) { this.acc=acc; }
-    public void setcid(int cid){
+    public void setAcc(int acc) { this.acc=acc; }
+    public void setCid(int cid){
         this.cid= cid;
     }
-    public void setbranch(String branch){
+    public void setBranch(String branch){
         this.branch=branch;
     }
-    public void setaccountbalance(int accountbalance){
-        this.accountbalance=accountbalance;
+    public void setAccountBalance(int accountBalance){
+        this.accountBalance = accountBalance;
     }
-    public int getacc(){
+    public int getAcc(){
         return this.acc;
     }
-    public int getcid(){
+    public int getCid(){
         return this.cid;
     }
-    public int getaccountbalance(){
-        return this.accountbalance;
+    public int getAccountBalance(){
+        return this.accountBalance;
     }
-    public String getbranch(){
+    public String getBranch(){
         return this.branch;
     }
     @Override
@@ -35,7 +35,7 @@ public class Accounts {
         String output="\nAccount Details\n"+
                 "Account Number   : "+this.acc+"\n"+
                 "Account Branch   : "+this.branch+"\n"+
-                "Account Balance  : "+this.accountbalance+"\n\n";
+                "Account Balance  : "+this.accountBalance +"\n\n";
         return output;
     }
 }

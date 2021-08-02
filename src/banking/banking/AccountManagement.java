@@ -28,32 +28,32 @@ public class AccountManagement {
     public void existingCustomer(){
         Accounts details= new Accounts();
         System.out.print("Enter your Customer ID: ");
-        details.setcid(scan.nextInt());
+        details.setCid(scan.nextInt());
         System.out.print("Enter the initial deposit: ");
-        details.setaccountbalance(scan.nextInt());
+        details.setAccountBalance(scan.nextInt());
         scan.nextLine();
         System.out.print("Enter the branch: ");
-        details.setbranch(scan.next());
+        details.setBranch(scan.next());
         db.setAccount(details);
     }
     public void newCustomer(){
-        Customers cusdetails = new Customers();
-        Accounts accdetails= new Accounts();
+        Customers cusDetails = new Customers();
+        Accounts accDetails = new Accounts();
         System.out.print("Enter your name: ");
-        cusdetails.setname(scan.nextLine());
+        cusDetails.setName(scan.nextLine());
         System.out.print("Enter your Email ID: ");
-        cusdetails.setemail(scan.nextLine());
+        cusDetails.setEmail(scan.nextLine());
         System.out.print("Enter your Mobile number: ");
-        cusdetails.setmobile(scan.nextLong());
+        cusDetails.setMobile(scan.nextLong());
         scan.nextLine();
         System.out.print("Enter your city: ");
-        cusdetails.setcity(scan.nextLine());
+        cusDetails.setCity(scan.nextLine());
         System.out.print("Enter the initial deposit: ");
-        accdetails.setaccountbalance(scan.nextInt());
+        accDetails.setAccountBalance(scan.nextInt());
         scan.nextLine();
         System.out.print("Enter the branch: ");
-        accdetails.setbranch(scan.next());
-        db.setCustomer(cusdetails,accdetails);
+        accDetails.setBranch(scan.next());
+        db.setCustomer(cusDetails, accDetails);
     }
     public void getData(){
         while(true){
@@ -70,25 +70,27 @@ public class AccountManagement {
         int cid=scan.nextInt();
         DatabaseUtil.getCustomer();
         DatabaseUtil.getAccount();
-        if(Customers.customerdetails.containsKey(cid)) {
-            System.out.print(Customers.customerdetails.get(cid) + "\n");
-            HashMap<Integer, Accounts> accountmap = Accounts.accountdetails.get(cid);
-            for (Accounts detail : accountmap.values()) {
+        if(Customers.customerDetails.containsKey(cid)) {
+            System.out.print(Customers.customerDetails.get(cid) + "\n");
+            HashMap<Integer, Accounts> accountMap = Accounts.accountdetails.get(cid);
+            for (Accounts detail : accountMap.values()) {
                 System.out.print(detail);
             }
         }
+        else System.out.println("No details available");
     }
     void getAccountData(){
         System.out.print("Enter your Customer ID: ");
         int cid=scan.nextInt();
         DatabaseUtil.getCustomer();
         DatabaseUtil.getAccount();
-        if(Customers.customerdetails.containsKey(cid)) {
-            System.out.print(Customers.customerdetails.get(cid) + "\n");
-            HashMap<Integer, Accounts> accountmap = Accounts.accountdetails.get(cid);
-            for (Accounts detail : accountmap.values()) {
+        if(Customers.customerDetails.containsKey(cid)) {
+            System.out.print(Customers.customerDetails.get(cid) + "\n");
+            HashMap<Integer, Accounts> accountMap = Accounts.accountdetails.get(cid);
+            for (Accounts detail : accountMap.values()) {
                 System.out.print(detail);
             }
         }
+        else System.out.println("No details available");
     }
 }
