@@ -1,7 +1,4 @@
 package banking.details;
-
-import java.util.HashMap;
-
 public class Accounts {
     private long accountNumber;
     private long customerID;

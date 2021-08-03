@@ -1,7 +1,4 @@
 package banking.details;
-
-import java.util.HashMap;
-
 public class Customers {
     private  long customerID;
     private String name;
