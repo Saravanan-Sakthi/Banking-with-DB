@@ -8,7 +8,7 @@ public class DataRecord {
     private static DataRecord record = null;
     private DataRecord(){
     }
-    public static DataRecord getRecord(){
+    public static DataRecord getInstance(){
         if(record==null){
             record= new DataRecord();
         }
@@ -18,11 +18,12 @@ public class DataRecord {
         customerDetails.put(detail.getCustomerID(),detail);
     }
     public void addAccount(Accounts detail){
-        if (this.accountDetails.containsKey(detail.getCustomerID())){
-            this.accountDetails.get(detail.getCustomerID()).put(detail.getAccountNumber(),detail);
+        HashMap<Long, Accounts> accountDetails = this.accountDetails.get(detail.getCustomerID());
+        if (accountDetails!=null){
+            accountDetails.put(detail.getAccountNumber(),detail);
         }
         else{
-            HashMap<Long, Accounts> accountDetails = new HashMap<>();
+            accountDetails= new HashMap<>();
             accountDetails.put(detail.getAccountNumber(),detail);
             this.accountDetails.put(detail.getCustomerID(), accountDetails);
         }

@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class AccountManagement {
     public static Scanner scan= BankingDriver.scan;
     public DatabaseUtil db= DatabaseUtil.getObject();
-    public static int numOFOperations;
+    public static int numOfOperations;
     public void create(){
         while (true){
             System.out.print("1. Existing customer\n2. New customer\n3. Exit\nEnter the option: ");
@@ -85,13 +85,13 @@ public class AccountManagement {
     void getCustomerData(){
         System.out.print("Enter your Customer ID: ");
         int cid=scan.nextInt();
-        if (numOFOperations==0){
+        if (numOfOperations ==0){
             DatabaseUtil.updateCustomerRecord();
             DatabaseUtil.updateAccountRecord();
         }
-        numOFOperations=0;
-        HashMap customerDetails= DataRecord.getRecord().getCustomerDetails();
-        HashMap accountDetails= DataRecord.getRecord().getAccountDetails();
+        numOfOperations =0;
+        HashMap customerDetails= DataRecord.getInstance().getCustomerDetails();
+        HashMap accountDetails= DataRecord.getInstance().getAccountDetails();
         if(customerDetails.containsKey(cid)) {
             System.out.print(customerDetails.get(cid) + "\n");
             HashMap <Integer, Accounts> accountMap = (HashMap<Integer, Accounts>) accountDetails.get(cid);
@@ -106,13 +106,13 @@ public class AccountManagement {
     void getAccountData(){
         System.out.print("Enter your Customer ID: ");
         int cid=scan.nextInt();
-        if(numOFOperations==0) {
+        if(numOfOperations ==0) {
             DatabaseUtil.updateCustomerRecord();
             DatabaseUtil.updateAccountRecord();
         }
-        numOFOperations=0;
-        HashMap customerDetails= DataRecord.getRecord().getCustomerDetails();
-        HashMap accountDetails= DataRecord.getRecord().getAccountDetails();
+        numOfOperations =0;
+        HashMap customerDetails= DataRecord.getInstance().getCustomerDetails();
+        HashMap accountDetails= DataRecord.getInstance().getAccountDetails();
         if(customerDetails.containsKey(cid)) {
             System.out.print(customerDetails.get(cid) + "\n");
             HashMap<Integer, Accounts> accountMap = (HashMap<Integer, Accounts>) accountDetails.get(cid);

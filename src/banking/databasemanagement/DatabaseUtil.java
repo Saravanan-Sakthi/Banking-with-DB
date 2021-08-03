@@ -5,12 +5,12 @@ import banking.details.*;
 import java.sql.*;
 
 public class DatabaseUtil {
-    private static Connection con =null;
+    private static Connection connection =null;
     private static DatabaseUtil db= null;
     private DatabaseUtil(){
         try{
             //Class.forName("com.mysql.jdbc.Driver");
-            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/banking","root","Sara@2303");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking","root","Sara@2303");
         }
         //catch( ClassNotFoundException e){
            // e.printStackTrace();
@@ -26,9 +26,9 @@ public class DatabaseUtil {
         return db;
     }
     public static void closeConnection(){
-        if(con!=null) {
+        if(connection !=null) {
             try {
-                con.close();
+                connection.close();
                 System.out.println("Connection closed");
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -40,7 +40,7 @@ public class DatabaseUtil {
     }
     public static void updateAccountRecord(){
         try{
-            Statement st=con.createStatement();
+            Statement st= connection.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM Accounts;");
             while(resSet.next()){
                 Accounts detail= new Accounts();
@@ -48,7 +48,7 @@ public class DatabaseUtil {
                 detail.setAccountNumber(resSet.getLong("Acc"));
                 detail.setBranch(resSet.getString("Branch"));
                 detail.setAccountBalance(resSet.getFloat("Account_Balance"));
-                DataRecord.getRecord().addAccount(detail);
+                DataRecord.getInstance().addAccount(detail);
             }
             resSet.close();
             st.close();
@@ -59,7 +59,7 @@ public class DatabaseUtil {
     }
     public static void updateCustomerRecord() {
         try{
-            Statement st=con.createStatement();
+            Statement st= connection.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM Customers");
             while(resSet.next()){
                 Customers detail= new Customers();
@@ -68,7 +68,7 @@ public class DatabaseUtil {
                 detail.setEmail(resSet.getString("Email"));
                 detail.setMobile(resSet.getLong("Mobile"));
                 detail.setCity(resSet.getString("City"));
-                DataRecord.getRecord().addCustomer(detail);
+                DataRecord.getInstance().addCustomer(detail);
             }
             resSet.close();
             st.close();
@@ -79,7 +79,7 @@ public class DatabaseUtil {
     }
     public void setCustomer(Customers cusDetails, Accounts accDetails){
         try{
-            PreparedStatement st=con.prepareStatement("INSERT INTO Customers (Name,Email,City,Mobile) VALUES (?,?,?,?)");
+            PreparedStatement st= connection.prepareStatement("INSERT INTO Customers (Name,Email,City,Mobile) VALUES (?,?,?,?)");
             st.setString(1, cusDetails.getName());
             st.setString(2, cusDetails.getEmail());
             st.setString(3, cusDetails.getCity());
@@ -100,7 +100,7 @@ public class DatabaseUtil {
     }
     public void setAccount(Accounts details){
         try{
-            PreparedStatement st=con.prepareStatement("INSERT INTO Accounts (Cid,Account_Balance,Branch) VALUES (?,?,?)");
+            PreparedStatement st= connection.prepareStatement("INSERT INTO Accounts (Cid,Account_Balance,Branch) VALUES (?,?,?)");
             st.setLong(1,details.getCustomerID());
             st.setFloat(2,details.getAccountBalance());
             st.setString(3, details.getBranch());
@@ -110,6 +110,6 @@ public class DatabaseUtil {
         catch(SQLException e){
             System.out.println(e);
         }
-        AccountManagement.numOFOperations++;
+        AccountManagement.numOfOperations++;
     }
 }
