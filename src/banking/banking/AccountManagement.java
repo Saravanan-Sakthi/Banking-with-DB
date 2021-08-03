@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class AccountManagement {
     public static Scanner scan= BankingDriver.scan;
     public DatabaseUtil db= DatabaseUtil.getObject();
+    public static int numOFOperations;
     public void create(){
         while (true){
             System.out.print("1. Existing customer\n2. New customer\n3. Exit\nEnter the option: ");
@@ -84,8 +85,11 @@ public class AccountManagement {
     void getCustomerData(){
         System.out.print("Enter your Customer ID: ");
         int cid=scan.nextInt();
-        DatabaseUtil.getCustomer();
-        DatabaseUtil.getAccount();
+        if (numOFOperations==0){
+            DatabaseUtil.getCustomer();
+            DatabaseUtil.getAccount();
+        }
+        numOFOperations=0;
         HashMap customerDetails= DataRecord.getRecord().getCustomerDetails();
         HashMap accountDetails= DataRecord.getRecord().getAccountDetails();
         if(customerDetails.containsKey(cid)) {
@@ -102,8 +106,11 @@ public class AccountManagement {
     void getAccountData(){
         System.out.print("Enter your Customer ID: ");
         int cid=scan.nextInt();
-        DatabaseUtil.getCustomer();
-        DatabaseUtil.getAccount();
+        if(numOFOperations==0) {
+            DatabaseUtil.getCustomer();
+            DatabaseUtil.getAccount();
+        }
+        numOFOperations=0;
         HashMap customerDetails= DataRecord.getRecord().getCustomerDetails();
         HashMap accountDetails= DataRecord.getRecord().getAccountDetails();
         if(customerDetails.containsKey(cid)) {

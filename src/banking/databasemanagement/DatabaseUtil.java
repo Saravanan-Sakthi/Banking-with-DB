@@ -1,8 +1,8 @@
 package banking.databasemanagement;
 
+import banking.banking.AccountManagement;
 import banking.details.*;
 import java.sql.*;
-import java.util.HashMap;
 
 public class DatabaseUtil {
     private static Connection con =null;
@@ -110,5 +110,6 @@ public class DatabaseUtil {
         catch(SQLException e){
             System.out.println(e);
         }
+        AccountManagement.numOFOperations++;
     }
 }
