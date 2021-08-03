@@ -19,50 +19,66 @@ public class AccountManagement {
             else {
                 scan.next();
             }
-            if (option==1) existingCustomer();
-            else if (option==2) newCustomer();
-            else if (option==3) break;
-            else System.out.println("Invalid input");
+            if (option==1) {
+                existingCustomer();
+            }
+            else if (option==2) {
+                newCustomer();
+            }
+            else if (option==3) {
+                break;
+            }
+            else {
+                System.out.println("Invalid input");
+            }
         }
     }
     public void existingCustomer(){
-        Accounts details= new Accounts();
+        Accounts AccountDetails = new Accounts();
         System.out.print("Enter your Customer ID: ");
-        details.setCid(scan.nextInt());
+        AccountDetails.setCustomerID(scan.nextInt());
         System.out.print("Enter the initial deposit: ");
-        details.setAccountBalance(scan.nextInt());
+        AccountDetails.setAccountBalance(scan.nextInt());
         scan.nextLine();
         System.out.print("Enter the branch: ");
-        details.setBranch(scan.next());
-        db.setAccount(details);
+        AccountDetails.setBranch(scan.next());
+        db.setAccount(AccountDetails);
     }
     public void newCustomer(){
-        Customers cusDetails = new Customers();
+        Customers customerDetails = new Customers();
         Accounts accDetails = new Accounts();
         System.out.print("Enter your name: ");
-        cusDetails.setName(scan.nextLine());
+        customerDetails.setName(scan.nextLine());
         System.out.print("Enter your Email ID: ");
-        cusDetails.setEmail(scan.nextLine());
+        customerDetails.setEmail(scan.nextLine());
         System.out.print("Enter your Mobile number: ");
-        cusDetails.setMobile(scan.nextLong());
+        customerDetails.setMobile(scan.nextLong());
         scan.nextLine();
         System.out.print("Enter your city: ");
-        cusDetails.setCity(scan.nextLine());
+        customerDetails.setCity(scan.nextLine());
         System.out.print("Enter the initial deposit: ");
         accDetails.setAccountBalance(scan.nextInt());
         scan.nextLine();
         System.out.print("Enter the branch: ");
         accDetails.setBranch(scan.next());
-        db.setCustomer(cusDetails, accDetails);
+        db.setCustomer(customerDetails, accDetails);
     }
     public void getData(){
         while(true){
             System.out.print("1. Account Details\n2. Customer Details\n3. Exit\nEnter the option: ");
             int option=scan.nextInt();
-            if (option==1) getAccountData();
-            else if(option==2) getCustomerData();
-            else if(option==3) break;
-            else System.out.println("Invalid input\n");
+            if (option==1) {
+                getAccountData();
+            }
+            else if(option==2) {
+                getCustomerData();
+            }
+            else if(option==3) {
+                break;
+            }
+            else {
+                System.out.println("Invalid input\n");
+            }
         }
     }
     void getCustomerData(){
@@ -70,27 +86,35 @@ public class AccountManagement {
         int cid=scan.nextInt();
         DatabaseUtil.getCustomer();
         DatabaseUtil.getAccount();
-        if(Customers.customerDetails.containsKey(cid)) {
-            System.out.print(Customers.customerDetails.get(cid) + "\n");
-            HashMap<Integer, Accounts> accountMap = Accounts.accountdetails.get(cid);
+        HashMap customerDetails= DataRecord.getRecord().getCustomerDetails();
+        HashMap accountDetails= DataRecord.getRecord().getAccountDetails();
+        if(customerDetails.containsKey(cid)) {
+            System.out.print(customerDetails.get(cid) + "\n");
+            HashMap <Integer, Accounts> accountMap = (HashMap<Integer, Accounts>) accountDetails.get(cid);
             for (Accounts detail : accountMap.values()) {
                 System.out.print(detail);
             }
         }
-        else System.out.println("No details available");
+        else {
+            System.out.println("No details available");
+        }
     }
     void getAccountData(){
         System.out.print("Enter your Customer ID: ");
         int cid=scan.nextInt();
         DatabaseUtil.getCustomer();
         DatabaseUtil.getAccount();
-        if(Customers.customerDetails.containsKey(cid)) {
-            System.out.print(Customers.customerDetails.get(cid) + "\n");
-            HashMap<Integer, Accounts> accountMap = Accounts.accountdetails.get(cid);
+        HashMap customerDetails= DataRecord.getRecord().getCustomerDetails();
+        HashMap accountDetails= DataRecord.getRecord().getAccountDetails();
+        if(customerDetails.containsKey(cid)) {
+            System.out.print(customerDetails.get(cid) + "\n");
+            HashMap<Integer, Accounts> accountMap = (HashMap<Integer, Accounts>) accountDetails.get(cid);
             for (Accounts detail : accountMap.values()) {
                 System.out.print(detail);
             }
         }
-        else System.out.println("No details available");
+        else {
+            System.out.println("No details available");
+        }
     }
 }

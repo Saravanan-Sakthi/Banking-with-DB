@@ -11,13 +11,19 @@ public class BankingDriver {
             System.out.print("1. Add Account\n2. View details\n3. Exit\nEnter the option: ");
             try {
                 int option = AccountManagement.scan.nextInt();
-                if (option==1) new AccountManagement().create();
-                else if(option==2) new AccountManagement().getData();
+                if (option==1) {
+                    new AccountManagement().create();
+                }
+                else if(option==2) {
+                    new AccountManagement().getData();
+                }
                 else if(option==3) {
                     DatabaseUtil.closeConnection();
                     break;
                 }
-                else System.out.println("Invalid input\n");
+                else {
+                    System.out.println("Invalid input\n");
+                }
             }
             catch(InputMismatchException ex){
                 System.out.println("Invalid input");

@@ -19,8 +19,10 @@ public class DatabaseUtil {
             e.printStackTrace();
         }
     }
-    public static DatabaseUtil getObject(){
-        if(db==null) db=new DatabaseUtil();
+    public static DatabaseUtil getObject() {
+        if(db==null) {
+            db = new DatabaseUtil();
+        }
         return db;
     }
     public static void closeConnection(){
@@ -32,6 +34,9 @@ public class DatabaseUtil {
                 e.printStackTrace();
             }
         }
+        else{
+            System.out.println("No connection established");
+        }
     }
     public static void getAccount(){
         try{
@@ -39,18 +44,11 @@ public class DatabaseUtil {
             ResultSet resSet = st.executeQuery("SELECT * FROM Accounts;");
             while(resSet.next()){
                 Accounts detail= new Accounts();
-                detail.setCid(resSet.getInt("Cid"));
-                detail.setAcc(resSet.getInt("Acc"));
+                detail.setCustomerID(resSet.getLong("Cid"));
+                detail.setAccountNumber(resSet.getLong("Acc"));
                 detail.setBranch(resSet.getString("Branch"));
-                detail.setAccountBalance(resSet.getInt("Account_Balance"));
-                if (Accounts.accountdetails.containsKey(detail.getCid())){
-                    Accounts.accountdetails.get(detail.getCid()).put(detail.getAcc(),detail);
-                }
-                else{
-                    HashMap<Integer, Accounts> accountDetails = new HashMap<>();
-                    accountDetails.put(detail.getAcc(),detail);
-                    Accounts.accountdetails.put(detail.getCid(), accountDetails);
-                }
+                detail.setAccountBalance(resSet.getFloat("Account_Balance"));
+                DataRecord.getRecord().addAccount(detail);
             }
             resSet.close();
             st.close();
@@ -65,12 +63,12 @@ public class DatabaseUtil {
             ResultSet resSet = st.executeQuery("SELECT * FROM Customers");
             while(resSet.next()){
                 Customers detail= new Customers();
-                detail.setCid(resSet.getInt("Cid"));
+                detail.setCustomerID(resSet.getLong("Cid"));
                 detail.setName(resSet.getString("Name"));
                 detail.setEmail(resSet.getString("Email"));
                 detail.setMobile(resSet.getLong("Mobile"));
                 detail.setCity(resSet.getString("City"));
-                Customers.customerDetails.put(detail.getCid(),detail);
+                DataRecord.getRecord().addCustomer(detail);
             }
             resSet.close();
             st.close();
@@ -89,8 +87,8 @@ public class DatabaseUtil {
             st.executeUpdate();
             ResultSet resSet =st.executeQuery("SELECT * FROM Customers WHERE Cid=(SELECT MAX(Cid) FROM Customers);");
             while(resSet.next()){
-                int cid= resSet.getInt("Cid");
-                accDetails.setCid(cid);
+                long cid= resSet.getInt("Cid");
+                accDetails.setCustomerID(cid);
             }
             resSet.close();
             setAccount(accDetails);
@@ -103,8 +101,8 @@ public class DatabaseUtil {
     public void setAccount(Accounts details){
         try{
             PreparedStatement st=con.prepareStatement("INSERT INTO Accounts (Cid,Account_Balance,Branch) VALUES (?,?,?)");
-            st.setInt(1,details.getCid());
-            st.setInt(2,details.getAccountBalance());
+            st.setLong(1,details.getCustomerID());
+            st.setFloat(2,details.getAccountBalance());
             st.setString(3, details.getBranch());
             st.executeUpdate();
             st.close();

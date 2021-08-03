@@ -3,28 +3,27 @@ package banking.details;
 import java.util.HashMap;
 
 public class Accounts {
-    public static HashMap<Integer, HashMap> accountdetails= new HashMap<>();
-    private int acc;
-    private int cid;
-    private int accountBalance;
+    private long accountNumber;
+    private long customerID;
+    private float accountBalance;
     private String branch;
-    public void setAcc(int acc) { this.acc=acc; }
-    public void setCid(int cid){
-        this.cid= cid;
+    public void setAccountNumber(long accountNumber) { this.accountNumber = accountNumber; }
+    public void setCustomerID(long customerID){
+        this.customerID = customerID;
     }
     public void setBranch(String branch){
         this.branch=branch;
     }
-    public void setAccountBalance(int accountBalance){
+    public void setAccountBalance(float accountBalance){
         this.accountBalance = accountBalance;
     }
-    public int getAcc(){
-        return this.acc;
+    public long getAccountNumber(){
+        return this.accountNumber;
     }
-    public int getCid(){
-        return this.cid;
+    public long getCustomerID(){
+        return this.customerID;
     }
-    public int getAccountBalance(){
+    public float getAccountBalance(){
         return this.accountBalance;
     }
     public String getBranch(){
@@ -33,7 +32,7 @@ public class Accounts {
     @Override
     public String toString(){
         String output="\nAccount Details\n"+
-                "Account Number   : "+this.acc+"\n"+
+                "Account Number   : "+this.accountNumber +"\n"+
                 "Account Branch   : "+this.branch+"\n"+
                 "Account Balance  : "+this.accountBalance +"\n\n";
         return output;
