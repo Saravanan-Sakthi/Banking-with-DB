@@ -86,8 +86,8 @@ public class AccountManagement {
         System.out.print("Enter your Customer ID: ");
         int cid=scan.nextInt();
         if (numOFOperations==0){
-            DatabaseUtil.getCustomer();
-            DatabaseUtil.getAccount();
+            DatabaseUtil.updateCustomerRecord();
+            DatabaseUtil.updateAccountRecord();
         }
         numOFOperations=0;
         HashMap customerDetails= DataRecord.getRecord().getCustomerDetails();
@@ -107,8 +107,8 @@ public class AccountManagement {
         System.out.print("Enter your Customer ID: ");
         int cid=scan.nextInt();
         if(numOFOperations==0) {
-            DatabaseUtil.getCustomer();
-            DatabaseUtil.getAccount();
+            DatabaseUtil.updateCustomerRecord();
+            DatabaseUtil.updateAccountRecord();
         }
         numOFOperations=0;
         HashMap customerDetails= DataRecord.getRecord().getCustomerDetails();

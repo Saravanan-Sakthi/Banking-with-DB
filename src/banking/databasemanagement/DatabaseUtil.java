@@ -38,7 +38,7 @@ public class DatabaseUtil {
             System.out.println("No connection established");
         }
     }
-    public static void getAccount(){
+    public static void updateAccountRecord(){
         try{
             Statement st=con.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM Accounts;");
@@ -57,7 +57,7 @@ public class DatabaseUtil {
             e.printStackTrace();
         }
     }
-    public static void getCustomer(){
+    public static void updateCustomerRecord() {
         try{
             Statement st=con.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM Customers");
